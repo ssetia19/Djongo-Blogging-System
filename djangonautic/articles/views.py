@@ -8,17 +8,17 @@ from django.db.models import Q
 
 # Create your views here.
 def article_list(request):
-	article = Article.objects.all().order_by('date')
+	article = Article.objects.using('blog').all().order_by('date')
 	return render(request,"articles/article_list.html",{'articles':article} )
 
 def article_search(request):
 	query = request.GET.get('search-box')
-	article = Article.objects.filter(Q(title__icontains=query))
+	article = Article.objects.using('blog').filter(Q(title__icontains=query))
 	return render(request,"articles/article_list.html",{'articles':article} )
 
 def article_detail(request,slug):
 	#return HttpResponse(slug)
-	var = Article.objects.get(slug=slug)
+	var = Article.objects.using('blog').get(slug=slug)
 	return render(request,'articles/article_detail.html',{'article':var})
 
 @login_required(login_url="/accounts/login")
@@ -30,7 +30,7 @@ def article_create(request):
 			#save article to db
 			instance = form.save(commit=False)
 			instance.author = request.user
-			instance.save()
+			instance.save(using='blog')
 			return redirect('articles:list')
 
 	else:

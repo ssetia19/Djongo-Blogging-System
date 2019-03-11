@@ -20,13 +20,6 @@
 
 					</li>
 					<li><a href="{% url 'articles:create'%}" class="highlight">New Article</a></li>
-					<li>
-						<form class="profile-link" action="{%url 'accounts:profile'%}" method='POST'>
-							{%csrf_token%}
-							<button type="submit">Profile</button>
-						</form>
-					</li>
-					
 					{% else %}
 					<li>
 						<a href="{% url 'accounts:login'%}">Log In</a></li>
