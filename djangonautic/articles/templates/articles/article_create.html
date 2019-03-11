@@ -1,0 +1,15 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+	<div class="create-article">
+		<h2>Create an awesome new article
+			<!-- whenever we have an upload field like thumb in this case we use enctype for encryption-->
+		<form class="site-form" action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{form}}
+			<input type="submit" value="Create">
+		</form>	
+	</div>
+	<script src="/static/slugify.js"></script>
+
+{% endblock %}

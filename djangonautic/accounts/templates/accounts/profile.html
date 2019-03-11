@@ -1,0 +1,20 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+	{% for item in profiles %}
+		<div class="profile-detail">
+			<div class="profile">
+				<h2>Hey  {{ item.username }}</h2>
+				<ul type=none>
+					<li><b>Email:</b> {{ item.email }}</li>
+					<li><b>Bio:</b> {{ item.bio }}</li>
+					<li><b>Date of Birth:</b> {{ item.dob }}</li>
+					<li><b>Country:</b> {{ item.country }}</li>
+				</ul>
+				
+				
+
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

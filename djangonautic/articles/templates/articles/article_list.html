@@ -1,0 +1,28 @@
+{% extends 'base_layout.html' %}
+
+{% load static from staticfiles %}
+
+{% block content %}
+<form class="search" action="{% url 'articles:search' %}" method="GET" type="get">
+	{% csrf_token %}
+	<input class="search-box" type="text" placeholder="Search..." name="search-box">
+	<button class ="submit" type="submit">Submit</button>
+</form>
+<h1>Article list</h1>
+	<div class="articles">
+		<!-- the below are known as template tag used for writing python code in html
+		first one is used for writing python code
+		second one is used to output some data -->
+		
+			{% for item in articles %}
+				<div class ="item">
+					<h2><a href="{% url 'articles:detail' slug=item.slug %}">{{item.title}}</a></h2>
+					<p>{{item.snippet}}</p>
+					<p>{{item.date}}</p>
+					<p class="author">added by {{ item.author }}</p>
+				</div>
+				
+			{% endfor %}
+		
+	</div>
+{% endblock %}
